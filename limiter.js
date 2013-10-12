@@ -68,7 +68,7 @@
                 len++;
             });
             
-            //calculate the chinese hanzi length
+            //calculate the chinese character length
             if(self.options.isEnToCn){
                 val = val.replace(/[^\x00-\xff]/g,"**");
                 len = Math.ceil(val.length/2);
@@ -124,15 +124,13 @@
 
         //cut the input
         _cutText : function (){
-            var self = this;
-            var isCut = self.options.isCut;
-            if(!isCut) return false;
-            var len = self.getlen();
-            var max = self.options.max;
+            if(!this.options.isCut) return false;
+            var len = this.getlen();
+            var max = this.options.max;
             $target = this.$target;
             if(len > max){
                 var val = $target.val();
-                while (self.getlen() > max){
+                while (this.getlen() > max){
                     val = $target.val();
                     val = val.substr(0, val.length - 1);
                     $target.val(val);
@@ -142,12 +140,11 @@
 
         //init
         _create : function(){
-            var self = this,
-                $wrapper = this.$wrapper,
+            var $wrapper = this.$wrapper,
                 $target = this.$target,
-                tpl = self.options.tpl,
-                len = self.getlen(),
-                max = self.options.max,
+                tpl = this.options.tpl,
+                len = this.getlen(),
+                max = this.options.max,
                 html;
             if(!$target.length) return false;
 
@@ -217,7 +214,7 @@
         //if filt the html tag when calculate the length, sometimes when in rich text editor.
         isRejectTag: false,
 
-        // a hanzi == two english
+        // a chinese character equals 2 byte
         isEnToCn: false,
 
         //if cut text when exceed
